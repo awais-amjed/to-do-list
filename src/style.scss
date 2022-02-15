@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+$inline-padding: 20px 40px;
+$light-grey: #e7e6e6;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#to-do-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5% 10%;
+  border: 1px solid $light-grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@mixin icon() {
+  border: none;
+  background-color: transparent;
+  color: dimgrey;
+  width: 30px;
+}
+
+@mixin row-space-between() {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  @include row-space-between;
+
+  padding: $inline-padding;
+
+  h1 {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+  button {
+    @include icon;
+  }
+}
+
+hr {
+  border: 1px solid $light-grey;
+}
+
+.add-new-task {
+  @include row-space-between;
+
+  padding: $inline-padding;
+
+  input {
+    width: 80%;
+    border: none;
+  }
+
+  input:enabled {
+    border: none;
+    outline: none;
+  }
+
+  button {
+    @include icon;
+  }
+}
+
+#tasks-list {
+  list-style: none;
+
+  .task {
+    @include row-space-between;
+
+    padding: $inline-padding;
+    align-items: center;
+
+    h2 {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    div {
+      @include row-space-between;
+
+      gap: 15px;
+      align-items: center;
+    }
+
+    button {
+      @include icon;
+    }
+  }
+}
+
+#clear-completed-button {
+  padding: $inline-padding;
+  border: none;
+  background-color: #f5f5f5;
+}
