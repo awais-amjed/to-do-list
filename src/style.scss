@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 $inline-padding: 20px 40px;
 $light-grey: #e7e6e6;
 
@@ -5,6 +7,7 @@ $light-grey: #e7e6e6;
   padding: 0;
   margin: 0;
   box-sizing: content-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 #to-do-container {
@@ -77,10 +80,7 @@ hr {
       @include row-space-between;
 
       gap: 15px;
-    }
-
-    button {
-      justify-self: end;
+      align-items: center;
     }
   }
 }
