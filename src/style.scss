@@ -10,6 +10,10 @@ $light-grey: #e7e6e6;
   font-family: 'Poppins', sans-serif;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 #to-do-container {
   display: flex;
   flex-direction: column;
@@ -19,7 +23,7 @@ $light-grey: #e7e6e6;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-button {
+@mixin icon() {
   border: none;
   background-color: transparent;
   color: dimgrey;
@@ -40,6 +44,10 @@ button {
     font-size: 1rem;
     font-weight: normal;
   }
+
+  button {
+    @include icon;
+  }
 }
 
 hr {
@@ -59,6 +67,10 @@ hr {
   input:enabled {
     border: none;
     outline: none;
+  }
+
+  button {
+    @include icon;
   }
 }
 
@@ -82,5 +94,15 @@ hr {
       gap: 15px;
       align-items: center;
     }
+
+    button {
+      @include icon;
+    }
   }
+}
+
+#clear-completed-button {
+  padding: $inline-padding;
+  border: none;
+  background-color: #f5f5f5;
 }
