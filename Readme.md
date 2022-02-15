@@ -15,6 +15,10 @@ An Application where you can keep a track of the tasks you need to do and checko
 - JavaScript
 - Webpack
 
+## Live Demo
+
+[Live Demo Link](https://awais-amjed.github.io/To-Do-List/)
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
