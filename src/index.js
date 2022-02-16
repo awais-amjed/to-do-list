@@ -16,4 +16,5 @@ const addNewTaskForm = document.getElementById('add-new-task');
 addNewTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   toDoList.addNewTask(addNewTaskForm.elements.new_task.value);
+  addNewTaskForm.elements.new_task.value = '';
 });
