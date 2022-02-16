@@ -59,19 +59,22 @@ hr {
   border: 1px solid $light-grey;
 }
 
+input {
+  border: none;
+}
+
+input:enabled {
+  border: none;
+  outline: none;
+}
+
 #add-new-task {
   @include row-space-between;
 
   padding: $inline-padding;
 
   input {
-    width: 80%;
-    border: none;
-  }
-
-  input:enabled {
-    border: none;
-    outline: none;
+    width: 90%;
   }
 
   button {
@@ -83,19 +86,31 @@ hr {
   list-style: none;
 
   .task {
-    @include row-space-between;
-
+    display: flex;
     padding: $inline-padding;
     align-items: center;
+    gap: 15px;
 
     h2 {
       font-size: 1rem;
       font-weight: normal;
     }
 
-    div {
-      @include row-space-between;
+    .description {
+      width: 100%;
 
+      input {
+        width: 95%;
+      }
+
+      input:disabled {
+        color: black;
+      }
+    }
+
+    .task-detail {
+      display: flex;
+      flex-grow: 1;
       gap: 15px;
       align-items: center;
     }
