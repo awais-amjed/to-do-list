@@ -1,6 +1,7 @@
 const tasksList = document.getElementById('tasks-list');
 
 const getNewTaskNode = (task) => {
+  // Initialize All Elements
   const taskItem = document.createElement('li');
   taskItem.classList.add('task');
 
@@ -19,38 +20,44 @@ const getNewTaskNode = (task) => {
   taskInput.value = task.description;
   taskInput.disabled = true;
 
-  description.appendChild(taskInput);
+  const moreButton = document.createElement('button');
+  moreButton.innerHTML = '<img class="icon" src="./assets/images/more.png" alt="Edit">';
 
+  const doneButton = document.createElement('button');
+  doneButton.innerHTML = `
+      <img class="icon" src="./assets/images/checked.png" alt="Update">
+    `;
+
+  const removeButton = document.createElement('button');
+  removeButton.innerHTML = `
+      <img class="icon" src="./assets/images/delete.png" alt="Remove">
+    `;
+
+  // Create DOM hierarchy
+  description.appendChild(taskInput);
   taskDetail.appendChild(checkbox);
   taskDetail.appendChild(description);
-
-  const button = document.createElement('button');
-  button.innerHTML = '<img class="icon" src="./assets/images/more.png" alt="">';
-
   taskItem.appendChild(taskDetail);
-  taskItem.appendChild(button);
+  taskItem.appendChild(moreButton);
 
-  description.addEventListener('click', () => {
+  // Add Event Listeners
+  doneButton.addEventListener('click', () => {
+    taskInput.disabled = true;
+    task.description = taskInput.value;
+    doneButton.remove();
+    removeButton.remove();
+    taskItem.appendChild(moreButton);
+  });
+
+  moreButton.addEventListener('click', () => {
     if (!taskInput.disabled) {
       return;
     }
 
     taskInput.disabled = false;
     taskInput.focus();
-
-    button.querySelector('img').src = './assets/images/delete.png';
-    const done = document.createElement('button');
-    done.innerHTML = `
-      <img class="icon" src="./assets/images/checked.png" alt="">
-    `;
-    button.insertAdjacentElement('beforebegin', done);
-
-    done.addEventListener('click', () => {
-      taskInput.disabled = true;
-      button.querySelector('img').src = './assets/images/more.png';
-      task.description = taskInput.value;
-      done.remove();
-    });
+    moreButton.remove();
+    taskItem.append(doneButton, removeButton);
   });
 
   return taskItem;
