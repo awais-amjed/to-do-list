@@ -4,10 +4,12 @@ import './assets/images/add.png';
 import './assets/images/more.png';
 import './assets/images/delete.png';
 import './assets/images/checked.png';
-import { addNewTask } from './modules/crud_functions.js';
+import ToDoList from './modules/ToDoList.js';
 import { populateAll } from './modules/html_functions.js';
 
-const tasks = [
+const toDoList = new ToDoList();
+
+toDoList.tasks = [
   {
     description: 'Wash the Dishes',
     completed: false,
@@ -20,10 +22,10 @@ const tasks = [
   },
 ];
 
-populateAll(tasks);
+populateAll(toDoList.tasks);
 
 const addNewTaskForm = document.getElementById('add-new-task');
 addNewTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  addNewTask(tasks, addNewTaskForm.elements.new_task.value);
+  toDoList.addNewTask(addNewTaskForm.elements.new_task.value);
 });
