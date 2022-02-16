@@ -1,28 +1,20 @@
 import './style.scss';
+import './assets/images/refresh.png';
+import './assets/images/add.png';
+import './assets/images/more.png';
+import './assets/images/delete.png';
+import './assets/images/checked.png';
+import './assets/images/clipboard.png';
+import ToDoList from './modules/to-do-list.js';
+import { populateAll } from './modules/html_functions.js';
 
-const tasks = [
-  {
-    description: 'Wash the Dishes',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Complete To Do List Projects',
-    completed: false,
-    index: 1,
-  },
-];
+const toDoList = new ToDoList();
 
-const tasksList = document.getElementById('tasks-list');
-tasks.forEach((task) => {
-  tasksList.innerHTML += `
-    <li><hr></li>
-    <li class="task">
-        <div>
-            <input type="checkbox" name="checkbox-${task.index}" ${task.completed ? 'checked' : 'unchecked'}>
-            <h2>${task.description}</h2>
-        </div>
-        <button><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
-    </li>
-  `;
+populateAll(toDoList);
+
+const addNewTaskForm = document.getElementById('add-new-task');
+addNewTaskForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  toDoList.addNewTask(addNewTaskForm.elements.new_task.value);
+  addNewTaskForm.elements.new_task.value = '';
 });

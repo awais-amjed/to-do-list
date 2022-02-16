@@ -2,6 +2,8 @@
 
 $inline-padding: 20px 40px;
 $light-grey: #e7e6e6;
+$grey-background: #eee;
+$new-task-background: #f6f6f6;
 
 * {
   padding: 0;
@@ -10,17 +12,35 @@ $light-grey: #e7e6e6;
   font-family: 'Poppins', sans-serif;
 }
 
+body {
+  position: relative;
+  background-color: #17b0be;
+}
+
+.clipboard {
+  padding: calc(10vh - 25px) 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+
 button:hover {
   cursor: pointer;
 }
 
+.to-do-Section {
+  padding: 10vh 10vw;
+}
+
 #to-do-container {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 5% 10%;
-  border: 1px solid $light-grey;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 10px solid #3a3a3c;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 @mixin icon() {
@@ -35,14 +55,21 @@ button:hover {
   justify-content: space-between;
 }
 
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
 .heading {
   @include row-space-between;
 
+  background-color: $grey-background;
   padding: $inline-padding;
 
   h1 {
-    font-size: 1rem;
-    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 
   button {
@@ -54,19 +81,29 @@ hr {
   border: 1px solid $light-grey;
 }
 
-.add-new-task {
+input {
+  border: none;
+}
+
+input:enabled {
+  border: none;
+  outline: none;
+}
+
+#add-new-task {
   @include row-space-between;
 
-  padding: $inline-padding;
+  background-color: $new-task-background;
+  padding: 0 40px;
 
   input {
-    width: 80%;
-    border: none;
+    padding: 25px 0;
+    background-color: $new-task-background;
+    width: 90%;
   }
 
-  input:enabled {
-    border: none;
-    outline: none;
+  input::placeholder {
+    font-style: italic;
   }
 
   button {
@@ -78,19 +115,28 @@ hr {
   list-style: none;
 
   .task {
-    @include row-space-between;
-
-    padding: $inline-padding;
+    display: flex;
+    padding: 0 40px;
     align-items: center;
+    gap: 15px;
 
-    h2 {
-      font-size: 1rem;
-      font-weight: normal;
+    .description {
+      width: 100%;
+
+      input {
+        padding: 25px 0;
+        text-overflow: ellipsis;
+        width: 95%;
+      }
+
+      input:disabled {
+        color: black;
+      }
     }
 
-    div {
-      @include row-space-between;
-
+    .task-detail {
+      display: flex;
+      flex-grow: 1;
       gap: 15px;
       align-items: center;
     }
@@ -104,5 +150,22 @@ hr {
 #clear-completed-button {
   padding: $inline-padding;
   border: none;
-  background-color: #f5f5f5;
+  background-color: $grey-background;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  padding: 15px;
+  z-index: 1;
+  bottom: 10px;
+  right: 10px;
+  background-color: #cc0f0f;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+
+  p {
+    text-align: center;
+    color: white;
+  }
 }

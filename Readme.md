@@ -35,6 +35,7 @@ A Web Browser (preferably Google Chrome)
 
 ### Usage
 
+- Run ```npm build``` to build the project
 - Run ```npm start``` to start the live server
 
 ## Authors
