@@ -94,9 +94,10 @@ input:enabled {
   @include row-space-between;
 
   background-color: $new-task-background;
-  padding: $inline-padding;
+  padding: 0 40px;
 
   input {
+    padding: 25px 0;
     background-color: $new-task-background;
     width: 90%;
   }
@@ -115,7 +116,7 @@ input:enabled {
 
   .task {
     display: flex;
-    padding: $inline-padding;
+    padding: 0 40px;
     align-items: center;
     gap: 15px;
 
@@ -123,6 +124,7 @@ input:enabled {
       width: 100%;
 
       input {
+        padding: 25px 0;
         text-overflow: ellipsis;
         width: 95%;
       }
