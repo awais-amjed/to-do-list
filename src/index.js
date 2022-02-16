@@ -10,19 +10,6 @@ import { populateAll } from './modules/html_functions.js';
 
 const toDoList = new ToDoList();
 
-toDoList.tasks = [
-  {
-    description: 'Wash the Dishes',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Complete To Do List Projects',
-    completed: false,
-    index: 1,
-  },
-];
-
 populateAll(toDoList);
 
 const addNewTaskForm = document.getElementById('add-new-task');

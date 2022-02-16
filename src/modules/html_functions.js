@@ -44,6 +44,8 @@ const getNewTaskNode = (task, toDoList) => {
   doneButton.addEventListener('click', () => {
     taskInput.disabled = true;
     task.description = taskInput.value;
+    toDoList.updateLocalStorage();
+
     doneButton.remove();
     removeButton.remove();
     taskItem.appendChild(moreButton);
