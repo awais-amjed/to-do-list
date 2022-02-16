@@ -35,6 +35,11 @@ button:hover {
   justify-content: space-between;
 }
 
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
 .heading {
   @include row-space-between;
 

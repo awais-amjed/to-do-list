@@ -1,4 +1,7 @@
 import './style.scss';
+import './assets/images/refresh.png';
+import './assets/images/add.png';
+import './assets/images/more.png';
 
 const tasks = [
   {
@@ -22,7 +25,7 @@ tasks.forEach((task) => {
             <input type="checkbox" name="checkbox-${task.index}" ${task.completed ? 'checked' : 'unchecked'}>
             <h2>${task.description}</h2>
         </div>
-        <button><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+        <button><img class="icon" src="./assets/images/more.png" alt=""></button>
     </li>
   `;
 });
