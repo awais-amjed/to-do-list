@@ -1,4 +1,4 @@
-import { addToHTML } from './html_functions.js';
+import { addToHTML, showPopup } from './html_functions.js';
 import storageAvailable from './local_storage.js';
 
 export default class ToDoList {
@@ -14,6 +14,15 @@ export default class ToDoList {
     }
   }
 
+  taskExists = (description) => {
+    for (let i = 0; i < this.tasks.length; i += 1) {
+      if (this.tasks[i].description === description) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   #fixIndices = (start) => {
     for (let i = start; i < this.tasks.length; i += 1) {
       this.tasks.at(i).index = i;
@@ -26,6 +35,11 @@ export default class ToDoList {
       completed: false,
       index: this.tasks.length,
     };
+
+    if (this.taskExists(task.description)) {
+      showPopup();
+      return;
+    }
 
     this.tasks.push(task);
     addToHTML(task, this);

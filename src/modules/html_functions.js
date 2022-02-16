@@ -1,4 +1,12 @@
 const tasksList = document.getElementById('tasks-list');
+const popup = document.getElementById('popup');
+
+export const showPopup = () => {
+  popup.style.display = 'block';
+  setTimeout(() => {
+    popup.style.display = 'none';
+  }, 3000);
+};
 
 const getNewTaskNode = (task, toDoList) => {
   // Initialize All Elements
@@ -42,6 +50,11 @@ const getNewTaskNode = (task, toDoList) => {
 
   // Add Event Listeners
   doneButton.addEventListener('click', () => {
+    if (toDoList.taskExists(taskInput.value)) {
+      showPopup();
+      return;
+    }
+
     taskInput.disabled = true;
     task.description = taskInput.value;
     toDoList.updateLocalStorage();
@@ -76,12 +89,6 @@ export const addToHTML = (task, toDoList) => {
   hr.innerHTML = '<hr>';
   tasksList.appendChild(hr);
   tasksList.appendChild(getNewTaskNode(task, toDoList));
-};
-
-export const removeFromHTML = (task) => {
-  const listItems = tasksList.querySelectorAll('li');
-  listItems.item(task.index * 2).remove();
-  listItems.item((task.index * 2) + 1).remove();
 };
 
 export const populateAll = (toDoList) => {
