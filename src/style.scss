@@ -59,7 +59,7 @@ hr {
   border: 1px solid $light-grey;
 }
 
-.add-new-task {
+#add-new-task {
   @include row-space-between;
 
   padding: $inline-padding;
