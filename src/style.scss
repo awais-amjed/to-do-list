@@ -2,6 +2,8 @@
 
 $inline-padding: 20px 40px;
 $light-grey: #e7e6e6;
+$grey-background: #eee;
+$new-task-background: #f6f6f6;
 
 * {
   padding: 0;
@@ -10,17 +12,35 @@ $light-grey: #e7e6e6;
   font-family: 'Poppins', sans-serif;
 }
 
+body {
+  position: relative;
+  background-color: #17b0be;
+}
+
+.clipboard {
+  padding: calc(10vh - 25px) 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+
 button:hover {
   cursor: pointer;
 }
 
+.to-do-Section {
+  padding: 10vh 10vw;
+}
+
 #to-do-container {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 5% 10%;
-  border: 1px solid $light-grey;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 10px solid #3a3a3c;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 @mixin icon() {
@@ -43,11 +63,13 @@ button:hover {
 .heading {
   @include row-space-between;
 
+  background-color: $grey-background;
   padding: $inline-padding;
 
   h1 {
-    font-size: 1rem;
-    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 
   button {
@@ -71,10 +93,16 @@ input:enabled {
 #add-new-task {
   @include row-space-between;
 
+  background-color: $new-task-background;
   padding: $inline-padding;
 
   input {
+    background-color: $new-task-background;
     width: 90%;
+  }
+
+  input::placeholder {
+    font-style: italic;
   }
 
   button {
@@ -91,15 +119,11 @@ input:enabled {
     align-items: center;
     gap: 15px;
 
-    h2 {
-      font-size: 1rem;
-      font-weight: normal;
-    }
-
     .description {
       width: 100%;
 
       input {
+        text-overflow: ellipsis;
         width: 95%;
       }
 
@@ -124,5 +148,5 @@ input:enabled {
 #clear-completed-button {
   padding: $inline-padding;
   border: none;
-  background-color: #f5f5f5;
+  background-color: $grey-background;
 }
