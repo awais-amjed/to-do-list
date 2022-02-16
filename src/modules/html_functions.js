@@ -8,6 +8,39 @@ export const showPopup = () => {
   }, 3000);
 };
 
+const doneButtonListener = (toDoList, taskItem, taskInput,
+  task, doneButton, removeButton, moreButton) => {
+  if (toDoList.taskExists(taskInput.value, task.index)) {
+    showPopup();
+    return;
+  }
+
+  taskInput.disabled = true;
+  task.description = taskInput.value;
+  toDoList.updateLocalStorage();
+
+  doneButton.remove();
+  removeButton.remove();
+  taskItem.appendChild(moreButton);
+};
+
+const removeButtonListener = (toDoList, taskItem, task) => {
+  tasksList.querySelectorAll('li').item(task.index * 2).remove();
+  taskItem.remove();
+  toDoList.removeTask(task);
+};
+
+const moreButtonListener = (taskItem, taskInput, doneButton, removeButton, moreButton) => {
+  if (!taskInput.disabled) {
+    return;
+  }
+
+  taskInput.disabled = false;
+  taskInput.focus();
+  moreButton.remove();
+  taskItem.append(doneButton, removeButton);
+};
+
 const getNewTaskNode = (task, toDoList) => {
   // Initialize All Elements
   const taskItem = document.createElement('li');
@@ -50,41 +83,22 @@ const getNewTaskNode = (task, toDoList) => {
 
   // Add Event Listeners
   doneButton.addEventListener('click', () => {
-    if (toDoList.taskExists(taskInput.value)) {
-      showPopup();
-      return;
-    }
-
-    taskInput.disabled = true;
-    task.description = taskInput.value;
-    toDoList.updateLocalStorage();
-
-    doneButton.remove();
-    removeButton.remove();
-    taskItem.appendChild(moreButton);
+    doneButtonListener(toDoList, taskItem, taskInput, task, doneButton, removeButton, moreButton);
   });
 
   removeButton.addEventListener('click', () => {
-    tasksList.querySelectorAll('li').item(task.index * 2).remove();
-    taskItem.remove();
-    toDoList.removeTask(task);
+    removeButtonListener(toDoList, taskItem, task);
   });
 
   moreButton.addEventListener('click', () => {
-    if (!taskInput.disabled) {
-      return;
-    }
-
-    taskInput.disabled = false;
-    taskInput.focus();
-    moreButton.remove();
-    taskItem.append(doneButton, removeButton);
+    moreButtonListener(taskItem, taskInput, doneButton, removeButton, moreButton);
   });
 
   return taskItem;
 };
 
 export const addToHTML = (task, toDoList) => {
+  // Adds a new Element to HTML DOM
   const hr = document.createElement('li');
   hr.innerHTML = '<hr>';
   tasksList.appendChild(hr);
@@ -92,6 +106,7 @@ export const addToHTML = (task, toDoList) => {
 };
 
 export const populateAll = (toDoList) => {
+  // Populate the To-DO List when the page loads
   toDoList.tasks.forEach((task) => {
     addToHTML(task, toDoList);
   });
