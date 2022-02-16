@@ -21,11 +21,11 @@ export default class ToDoList {
     };
 
     this.tasks.push(task);
-    addToHTML(task);
+    addToHTML(task, this);
   };
 
-  removeTask = (tasks, toRemove) => {
-    tasks.splice(toRemove.index, 1);
-    this.#fixIndices(tasks, toRemove.index);
+  removeTask = (toRemove) => {
+    this.tasks.splice(toRemove.index, 1);
+    this.#fixIndices(toRemove.index);
   };
 }

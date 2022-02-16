@@ -1,6 +1,6 @@
 const tasksList = document.getElementById('tasks-list');
 
-const getNewTaskNode = (task) => {
+const getNewTaskNode = (task, toDoList) => {
   // Initialize All Elements
   const taskItem = document.createElement('li');
   taskItem.classList.add('task');
@@ -49,6 +49,12 @@ const getNewTaskNode = (task) => {
     taskItem.appendChild(moreButton);
   });
 
+  removeButton.addEventListener('click', () => {
+    tasksList.querySelectorAll('li').item(task.index * 2).remove();
+    taskItem.remove();
+    toDoList.removeTask(task);
+  });
+
   moreButton.addEventListener('click', () => {
     if (!taskInput.disabled) {
       return;
@@ -63,21 +69,21 @@ const getNewTaskNode = (task) => {
   return taskItem;
 };
 
-export const populateAll = (tasks) => {
-  tasks.forEach((task) => {
-    tasksList.appendChild(getNewTaskNode(task));
-  });
-};
-
-export const addToHTML = (task) => {
+export const addToHTML = (task, toDoList) => {
   const hr = document.createElement('li');
   hr.innerHTML = '<hr>';
   tasksList.appendChild(hr);
-  tasksList.appendChild(getNewTaskNode(task));
+  tasksList.appendChild(getNewTaskNode(task, toDoList));
 };
 
 export const removeFromHTML = (task) => {
   const listItems = tasksList.querySelectorAll('li');
   listItems.item(task.index * 2).remove();
   listItems.item((task.index * 2) + 1).remove();
+};
+
+export const populateAll = (toDoList) => {
+  toDoList.tasks.forEach((task) => {
+    addToHTML(task, toDoList);
+  });
 };

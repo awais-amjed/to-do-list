@@ -22,7 +22,7 @@ toDoList.tasks = [
   },
 ];
 
-populateAll(toDoList.tasks);
+populateAll(toDoList);
 
 const addNewTaskForm = document.getElementById('add-new-task');
 addNewTaskForm.addEventListener('submit', (event) => {
