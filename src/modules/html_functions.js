@@ -30,10 +30,18 @@ const removeButtonListener = (toDoList, taskItem, task) => {
   toDoList.removeTask(task);
 };
 
-const moreButtonListener = (taskItem, taskInput, doneButton, removeButton, moreButton) => {
+const moreButtonListener = (toDoList, taskItem, taskInput, task,
+  doneButton, removeButton, moreButton) => {
   if (!taskInput.disabled) {
     return;
   }
+
+  taskInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+      doneButtonListener(toDoList, taskItem, taskInput,
+        task, doneButton, removeButton, moreButton);
+    }
+  });
 
   taskInput.disabled = false;
   taskInput.focus();
@@ -91,7 +99,7 @@ const getNewTaskNode = (task, toDoList) => {
   });
 
   moreButton.addEventListener('click', () => {
-    moreButtonListener(taskItem, taskInput, doneButton, removeButton, moreButton);
+    moreButtonListener(toDoList, taskItem, taskInput, task, doneButton, removeButton, moreButton);
   });
 
   return taskItem;
