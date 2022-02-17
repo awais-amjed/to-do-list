@@ -41,7 +41,7 @@ export default class ToDoList {
     };
 
     if (this.taskExists(task.description)) {
-      showPopup();
+      showPopup('This task already exists');
       return;
     }
 
