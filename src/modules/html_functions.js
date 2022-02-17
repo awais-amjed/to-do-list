@@ -49,6 +49,16 @@ const moreButtonListener = (toDoList, taskItem, taskInput, task,
   taskItem.append(doneButton, removeButton);
 };
 
+const checkboxListener = (toDoList, task, checkbox, taskInput) => {
+  task.completed = checkbox.checked;
+  if (checkbox.checked === true) {
+    taskInput.classList.add('checked');
+  } else {
+    taskInput.classList.remove('checked');
+  }
+  toDoList.updateLocalStorage();
+};
+
 const getNewTaskNode = (task, toDoList) => {
   // Initialize All Elements
   const taskItem = document.createElement('li');
@@ -68,6 +78,9 @@ const getNewTaskNode = (task, toDoList) => {
   taskInput.type = 'text';
   taskInput.value = task.description;
   taskInput.disabled = true;
+  if (task.completed === true) {
+    taskInput.classList.add('checked');
+  }
 
   const moreButton = document.createElement('button');
   moreButton.innerHTML = '<img class="icon" src="./assets/images/more.png" alt="Edit">';
@@ -102,6 +115,10 @@ const getNewTaskNode = (task, toDoList) => {
     moreButtonListener(toDoList, taskItem, taskInput, task, doneButton, removeButton, moreButton);
   });
 
+  checkbox.addEventListener('click', () => {
+    checkboxListener(toDoList, task, checkbox, taskInput);
+  });
+
   return taskItem;
 };
 
@@ -111,6 +128,18 @@ export const addToHTML = (task, toDoList) => {
   hr.innerHTML = '<hr>';
   tasksList.appendChild(hr);
   tasksList.appendChild(getNewTaskNode(task, toDoList));
+};
+
+export const removeAllCompleted = (toDoList) => {
+  const listItems = tasksList.querySelectorAll('li');
+
+  for (let i = toDoList.tasks.length - 1; i >= 0; i -= 1) {
+    if (toDoList.tasks.at(i).completed === true) {
+      listItems.item(toDoList.tasks.at(i).index * 2 + 1).remove();
+      listItems.item(toDoList.tasks.at(i).index * 2).remove();
+      toDoList.removeTask(toDoList.tasks.at(i));
+    }
+  }
 };
 
 export const populateAll = (toDoList) => {

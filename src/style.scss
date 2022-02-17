@@ -129,9 +129,15 @@ input:enabled {
         width: 95%;
       }
 
-      input:disabled {
-        color: black;
+      .checked {
+        color: grey;
+        font-style: italic;
+        text-decoration: line-through;
       }
+    }
+
+    input:disabled {
+      color: black;
     }
 
     .task-detail {

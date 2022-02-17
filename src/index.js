@@ -6,7 +6,7 @@ import './assets/images/delete.png';
 import './assets/images/checked.png';
 import './assets/images/clipboard.png';
 import ToDoList from './modules/to-do-list.js';
-import { populateAll } from './modules/html_functions.js';
+import { populateAll, removeAllCompleted } from './modules/html_functions.js';
 
 const toDoList = new ToDoList();
 
@@ -17,4 +17,8 @@ addNewTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   toDoList.addNewTask(addNewTaskForm.elements.new_task.value);
   addNewTaskForm.elements.new_task.value = '';
+});
+
+document.getElementById('clear-completed-button').addEventListener('click', () => {
+  removeAllCompleted(toDoList);
 });
