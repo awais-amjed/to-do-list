@@ -1,11 +1,31 @@
 const tasksList = document.getElementById('tasks-list');
 const popup = document.getElementById('popup');
+const toDoContainer = document.getElementById('to-do-container');
 
-export const showPopup = () => {
-  popup.style.display = 'block';
+export const swing = () => {
+  toDoContainer.classList.remove('animate__swing');
   setTimeout(() => {
-    popup.style.display = 'none';
+    toDoContainer.classList.add('animate__swing');
+  }, 10);
+};
+
+export const showPopup = (error) => {
+  if (error) {
+    popup.querySelector('p').textContent = error;
+  }
+
+  popup.style.display = 'block';
+  popup.classList.remove('animate__slideOutRight');
+  popup.classList.add('animate__slideInRight');
+  setTimeout(() => {
+    popup.classList.remove('animate__slideInRight');
+    popup.classList.add('animate__slideOutRight');
   }, 3000);
+
+  toDoContainer.classList.remove('animate__shakeX');
+  setTimeout(() => {
+    toDoContainer.classList.add('animate__shakeX');
+  }, 10);
 };
 
 const doneButtonListener = (toDoList, taskItem, taskInput,
@@ -19,14 +39,27 @@ const doneButtonListener = (toDoList, taskItem, taskInput,
   task.description = taskInput.value;
   toDoList.updateLocalStorage();
 
-  doneButton.remove();
-  removeButton.remove();
-  taskItem.appendChild(moreButton);
+  doneButton.classList.add('animate__fadeOutDown');
+  removeButton.classList.add('animate__fadeOutDown');
+  setTimeout(() => {
+    doneButton.remove();
+    removeButton.remove();
+    moreButton.classList.add('animate__fadeInDown');
+    doneButton.classList.remove('animate__fadeOutDown');
+    removeButton.classList.remove('animate__fadeOutDown');
+    taskItem.appendChild(moreButton);
+  }, 100);
 };
 
 const removeButtonListener = (toDoList, taskItem, task) => {
   tasksList.querySelectorAll('li').item(task.index * 2).remove();
-  taskItem.remove();
+  taskItem.classList.remove('animate__bounceInLeft');
+  setTimeout(() => {
+    taskItem.classList.add('animate__bounceOutRight');
+    setTimeout(() => {
+      taskItem.remove();
+    }, 500);
+  }, 10);
   toDoList.removeTask(task);
 };
 
@@ -45,8 +78,12 @@ const moreButtonListener = (toDoList, taskItem, taskInput, task,
 
   taskInput.disabled = false;
   taskInput.focus();
-  moreButton.remove();
-  taskItem.append(doneButton, removeButton);
+  moreButton.classList.add('animate__fadeOutDown');
+  setTimeout(() => {
+    moreButton.remove();
+    taskItem.append(doneButton, removeButton);
+    moreButton.classList.remove('animate__fadeOutDown');
+  }, 100);
 };
 
 const checkboxListener = (toDoList, task, checkbox, taskInput) => {
@@ -62,6 +99,7 @@ const checkboxListener = (toDoList, task, checkbox, taskInput) => {
 const getNewTaskNode = (task, toDoList) => {
   // Initialize All Elements
   const taskItem = document.createElement('li');
+  taskItem.classList.add('animate__animated', 'animate__bounceInLeft');
   taskItem.classList.add('task');
 
   const taskDetail = document.createElement('div');
@@ -83,14 +121,17 @@ const getNewTaskNode = (task, toDoList) => {
   }
 
   const moreButton = document.createElement('button');
+  moreButton.classList.add('animate__animated', 'animate__faster');
   moreButton.innerHTML = '<img class="icon" src="./assets/images/more.png" alt="Edit">';
 
   const doneButton = document.createElement('button');
+  doneButton.classList.add('animate__animated', 'animate__fadeInDown', 'animate__faster');
   doneButton.innerHTML = `
-      <img class="icon" src="./assets/images/checked.png" alt="Update">
+      <img class="icon" src="./assets/images/accept.png" alt="Update">
     `;
 
   const removeButton = document.createElement('button');
+  removeButton.classList.add('animate__animated', 'animate__fadeInDown', 'animate__faster');
   removeButton.innerHTML = `
       <img class="icon" src="./assets/images/delete.png" alt="Remove">
     `;
@@ -132,14 +173,17 @@ export const addToHTML = (task, toDoList) => {
 
 export const removeAllCompleted = (toDoList) => {
   const listItems = tasksList.querySelectorAll('li');
+  let removed = false;
 
   for (let i = toDoList.tasks.length - 1; i >= 0; i -= 1) {
     if (toDoList.tasks.at(i).completed === true) {
-      listItems.item(toDoList.tasks.at(i).index * 2 + 1).remove();
-      listItems.item(toDoList.tasks.at(i).index * 2).remove();
-      toDoList.removeTask(toDoList.tasks.at(i));
+      removed = true;
+      const item = listItems.item(i * 2 + 1);
+      removeButtonListener(toDoList, item, toDoList.tasks.at(i));
     }
   }
+
+  return removed;
 };
 
 export const populateAll = (toDoList) => {

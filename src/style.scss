@@ -1,31 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+$body-background: #17b0be;
 $inline-padding: 20px 40px;
 $light-grey: #e7e6e6;
 $grey-background: #eee;
 $new-task-background: #f6f6f6;
+
+root {
+  --animate-delay: 0.5s;
+}
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
   font-family: 'Poppins', sans-serif;
+  transition: 300ms;
 }
 
 body {
   position: relative;
-  background-color: #17b0be;
+  background-color: $body-background;
 }
 
 .clipboard {
-  padding: calc(10vh - 25px) 0;
+  padding: calc(10vh - 25px) 0 0 0;
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
+  z-index: 1;
 }
 
-button:hover {
+button {
   cursor: pointer;
 }
 
@@ -58,6 +65,11 @@ button:hover {
 .icon {
   width: 30px;
   height: 30px;
+  opacity: 1;
+}
+
+.icon:hover {
+  opacity: 0.7;
 }
 
 .heading {
@@ -122,6 +134,8 @@ input:enabled {
 
     .description {
       width: 100%;
+      display: flex;
+      align-items: baseline;
 
       input {
         padding: 25px 0;
