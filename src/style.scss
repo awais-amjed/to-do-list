@@ -194,3 +194,16 @@ input[type=checkbox] {
   width: 20px;
   height: 20px;
 }
+
+#dropped {
+  inset: 0;
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
