@@ -1,6 +1,7 @@
 const tasksList = document.getElementById('tasks-list');
 const popup = document.getElementById('popup');
 const toDoContainer = document.getElementById('to-do-container');
+const clipBoard = document.querySelector('.clipboard img');
 
 export const swing = () => {
   toDoContainer.classList.remove('animate__shakeX');
@@ -27,6 +28,19 @@ export const showPopup = (error) => {
   setTimeout(() => {
     toDoContainer.classList.add('animate__shakeX');
   }, 10);
+};
+
+export const drop = () => {
+  toDoContainer.classList.remove('animate__shakeX');
+  toDoContainer.classList.add('animate__hinge');
+  document.body.style.overflowY = 'hidden';
+  setTimeout(() => {
+    document.getElementById('dropped').style.display = 'flex';
+    clipBoard.addEventListener('click', () => {
+      showPopup("Should've thought about it before. Just Refresh the page now.");
+    });
+    clipBoard.removeEventListener('click', drop);
+  }, 2000);
 };
 
 const doneButtonListener = (toDoList, taskItem, taskInput,

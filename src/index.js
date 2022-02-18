@@ -1,7 +1,7 @@
 import './style.scss';
 import ToDoList from './modules/to-do-list.js';
 import {
-  populateAll, removeAllCompleted, showPopup, swing,
+  populateAll, removeAllCompleted, showPopup, swing, drop,
 } from './modules/html_functions.js';
 import 'animate.css';
 import './assets/images/refresh.png';
@@ -31,4 +31,8 @@ document.getElementById('clear-completed-button').addEventListener('click', () =
 const refreshButton = document.getElementById('refresh-button');
 refreshButton.addEventListener('click', () => {
   swing();
+});
+
+document.querySelector('.clipboard img').addEventListener('click', () => {
+  drop();
 });
