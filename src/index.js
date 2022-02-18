@@ -10,6 +10,7 @@ import './assets/images/more.png';
 import './assets/images/delete.png';
 import './assets/images/clipboard.png';
 import './assets/images/accept.png';
+import './assets/images/favicon.png';
 
 const toDoList = new ToDoList();
 
