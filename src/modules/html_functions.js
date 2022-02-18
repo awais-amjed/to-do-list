@@ -3,10 +3,11 @@ const popup = document.getElementById('popup');
 const toDoContainer = document.getElementById('to-do-container');
 
 export const swing = () => {
-  toDoContainer.classList.remove('animate__swing');
+  toDoContainer.classList.remove('animate__shakeX');
+  toDoContainer.classList.add('animate__swing');
   setTimeout(() => {
-    toDoContainer.classList.add('animate__swing');
-  }, 10);
+    toDoContainer.classList.remove('animate__swing');
+  }, 1000);
 };
 
 export const showPopup = (error) => {
