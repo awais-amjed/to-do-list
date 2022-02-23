@@ -1,4 +1,3 @@
-const tasksList = document.getElementById('tasks-list');
 const popup = document.getElementById('popup');
 const toDoContainer = document.getElementById('to-do-container');
 const clipBoard = document.querySelector('.clipboard img');
@@ -67,7 +66,7 @@ const doneButtonListener = (toDoList, taskItem, taskInput,
 };
 
 const removeButtonListener = (toDoList, taskItem, task) => {
-  tasksList.querySelectorAll('li').item(task.index * 2).remove();
+  document.getElementById('tasks-list').querySelectorAll('li').item(task.index * 2).remove();
   taskItem.classList.remove('animate__bounceInLeft');
   setTimeout(() => {
     taskItem.classList.add('animate__bounceOutRight');
@@ -180,6 +179,7 @@ const getNewTaskNode = (task, toDoList) => {
 
 export const addToHTML = (task, toDoList) => {
   // Adds a new Element to HTML DOM
+  const tasksList = document.getElementById('tasks-list');
   const hr = document.createElement('li');
   hr.innerHTML = '<hr>';
   tasksList.appendChild(hr);
@@ -187,7 +187,7 @@ export const addToHTML = (task, toDoList) => {
 };
 
 export const removeAllCompleted = (toDoList) => {
-  const listItems = tasksList.querySelectorAll('li');
+  const listItems = document.getElementById('tasks-list').querySelectorAll('li');
   let removed = false;
 
   for (let i = toDoList.tasks.length - 1; i >= 0; i -= 1) {
