@@ -25,7 +25,7 @@ export default class ToDoList {
       }
     }
     return false;
-  }
+  };
 
   #fixIndices = (start) => {
     for (let i = start; i < this.tasks.length; i += 1) {
@@ -60,5 +60,15 @@ export default class ToDoList {
     if (storageAvailable('localStorage') === true) {
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
-  }
+  };
+
+  updateExistingTask = (index, description) => {
+    this.tasks.at(index).description = description;
+    this.updateLocalStorage();
+  };
+
+  updateChecked = (index, isChecked) => {
+    this.tasks.at(index).completed = isChecked;
+    this.updateLocalStorage();
+  };
 }
