@@ -21,4 +21,11 @@ describe('Manipulate Tasks List', () => {
     expect(todo.tasks).toHaveLength(previousLength + 1);
     expect(tasksList.childElementCount).toBe((previousLength + 1) * 2);
   });
+
+  test('Remove task from the list', () => {
+    const task = { index: 0 };
+    const previousLength = todo.tasks.length;
+    todo.removeTask(task);
+    expect(todo.tasks).toHaveLength(previousLength - 1);
+  });
 });
