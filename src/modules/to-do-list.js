@@ -61,4 +61,14 @@ export default class ToDoList {
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
   }
+
+  updateExistingTask = (index, description) => {
+    this.tasks.at(index).description = description;
+    this.updateLocalStorage();
+  }
+
+  updateChecked = (index, isChecked) => {
+    this.tasks.at(index).checked = isChecked;
+    this.updateLocalStorage();
+  }
 }

@@ -50,8 +50,7 @@ const doneButtonListener = (toDoList, taskItem, taskInput,
   }
 
   taskInput.disabled = true;
-  task.description = taskInput.value;
-  toDoList.updateLocalStorage();
+  toDoList.updateExistingTask(task.index, taskInput.value);
 
   doneButton.classList.add('animate__fadeOutDown');
   removeButton.classList.add('animate__fadeOutDown');
@@ -101,13 +100,12 @@ const moreButtonListener = (toDoList, taskItem, taskInput, task,
 };
 
 const checkboxListener = (toDoList, task, checkbox, taskInput) => {
-  task.completed = checkbox.checked;
+  toDoList.updateChecked(task.index, checkbox.checked);
   if (checkbox.checked === true) {
     taskInput.classList.add('checked');
   } else {
     taskInput.classList.remove('checked');
   }
-  toDoList.updateLocalStorage();
 };
 
 const getNewTaskNode = (task, toDoList) => {
