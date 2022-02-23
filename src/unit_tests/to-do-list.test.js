@@ -38,6 +38,10 @@ describe('Manipulate Tasks List', () => {
     expect(todo.tasks.at(0).description).toBe('Test test 1');
   });
 
+  test('Check for the task completion', () => {
+    todo.updateChecked(0, true);
+    expect(todo.tasks.at(0).completed).toBe(true);
+  });
   test('Remove task from the list', () => {
     const task = { index: 0 };
     const previousLength = todo.tasks.length;
