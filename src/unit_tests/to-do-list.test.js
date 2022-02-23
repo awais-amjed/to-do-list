@@ -3,7 +3,7 @@
  */
 
 import ToDoList from '../modules/to-do-list.js';
-import 'jest';
+import { removeAllCompleted } from '../modules/html_functions.js';
 
 describe('Manipulate Tasks List', () => {
   const todo = new ToDoList();
@@ -42,7 +42,14 @@ describe('Manipulate Tasks List', () => {
     todo.updateChecked(0, true);
     expect(todo.tasks.at(0).completed).toBe(true);
   });
+
+  test('Clear all Completed', () => {
+    removeAllCompleted(todo);
+    expect(todo.tasks).toHaveLength(0);
+  });
+
   test('Remove task from the list', () => {
+    todo.addNewTask('Test 2');
     const task = { index: 0 };
     const previousLength = todo.tasks.length;
     todo.removeTask(task);
