@@ -43,7 +43,6 @@ A Web Browser (preferably Google Chrome)
 👤 **Author1**
 
 - GitHub: [Awais Amjed](https://github.com/awais-amjed)
-- Website: [Coding Fries](https://codingfries.com)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/awais-amjed)
 
 ## 🤝 Contributing
